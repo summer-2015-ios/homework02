@@ -10,6 +10,7 @@
 #import <Parse.h>
 #import <MBProgressHUD.h>
 #import <ParseUI.h>
+#import "UserViewController.h"
 
 @interface UsersViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -70,21 +71,22 @@
         userProfilePic.file = (PFFile *) user[@"profilePic"];
         [userProfilePic loadInBackground];
     }
-    
-//    UIImageView* imageView = (UIImageView*)[cell viewWithTag:2000];
-//    [imageView sd_setImageWithURL:[NSURL URLWithString:[user.<#url field#>]]
-//                 placeholderImage:[UIImage imageNamed:@"No_Image_Available"]];
     return cell;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"usersToUserSegue"]) {
+        UserViewController* vc = [segue destinationViewController];
+        UITableViewCell* cell = (UITableViewCell*) sender;
+        long row = [self.tableView indexPathForCell:cell].row;
+        vc.user = (PFUser*)self.users[row];
+        NSLog(@"Sending model %@", vc.user);
+    }
 }
-*/
+
 
 @end

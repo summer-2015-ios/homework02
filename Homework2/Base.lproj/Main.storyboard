@@ -331,6 +331,9 @@
                                                 <constraint firstItem="LiO-1z-IWH" firstAttribute="leading" secondItem="7WA-6a-4hE" secondAttribute="leadingMargin" id="dr9-2i-m5K"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="3AC-en-5ou" kind="show" identifier="usersToUserSegue" id="qqk-mJ-KeP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -357,7 +360,91 @@
             </objects>
             <point key="canvasLocation" x="2164" y="173"/>
         </scene>
+        <!--User-->
+        <scene sceneID="Jju-0z-a2T">
+            <objects>
+                <viewController id="3AC-en-5ou" customClass="UserViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J4x-bf-7LG"/>
+                        <viewControllerLayoutGuide type="bottom" id="DQd-ba-cC8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tJR-8M-SlQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-placeholder-2" translatesAutoresizingMaskIntoConstraints="NO" id="7xP-0p-gLz">
+                                <rect key="frame" x="250" y="91" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Dbg-TF-CMT"/>
+                                    <constraint firstAttribute="height" constant="100" id="bM5-kc-rhf"/>
+                                </constraints>
+                            </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOD-Ow-oKo">
+                                <rect key="frame" x="251" y="199" width="99" height="30"/>
+                                <state key="normal" title="Change Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changePhotoClicked:" destination="3AC-en-5ou" eventType="touchUpInside" id="mP1-to-bOh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7f1-5Q-YpV">
+                                <rect key="frame" x="16" y="257" width="82" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qni-qI-SWu">
+                                <rect key="frame" x="16" y="286" width="47" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmT-8p-aWT" userLabel="fullName">
+                                <rect key="frame" x="106" y="257" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnj-3Z-SxE" userLabel="email">
+                                <rect key="frame" x="106" y="286" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7f1-5Q-YpV" firstAttribute="top" secondItem="J4x-bf-7LG" secondAttribute="bottom" constant="193" id="2Tb-68-zlE"/>
+                            <constraint firstItem="Qni-qI-SWu" firstAttribute="leading" secondItem="tJR-8M-SlQ" secondAttribute="leadingMargin" id="8DJ-9O-j9M"/>
+                            <constraint firstItem="HmT-8p-aWT" firstAttribute="top" secondItem="J4x-bf-7LG" secondAttribute="bottom" constant="193" id="EGC-bF-lRz"/>
+                            <constraint firstItem="dOD-Ow-oKo" firstAttribute="top" secondItem="7xP-0p-gLz" secondAttribute="bottom" constant="8" id="Eor-ic-47z"/>
+                            <constraint firstItem="gnj-3Z-SxE" firstAttribute="top" secondItem="HmT-8p-aWT" secondAttribute="bottom" constant="8" id="Hys-Ec-uEp"/>
+                            <constraint firstItem="HmT-8p-aWT" firstAttribute="leading" secondItem="7f1-5Q-YpV" secondAttribute="trailing" constant="8" id="N4g-GG-CxK"/>
+                            <constraint firstItem="gnj-3Z-SxE" firstAttribute="leading" secondItem="Qni-qI-SWu" secondAttribute="trailing" constant="43" id="PWY-HU-CXY"/>
+                            <constraint firstItem="7xP-0p-gLz" firstAttribute="top" secondItem="J4x-bf-7LG" secondAttribute="bottom" constant="27" id="QIK-W6-x66"/>
+                            <constraint firstAttribute="centerX" secondItem="dOD-Ow-oKo" secondAttribute="centerX" id="aYg-Me-YJt"/>
+                            <constraint firstItem="7f1-5Q-YpV" firstAttribute="leading" secondItem="tJR-8M-SlQ" secondAttribute="leadingMargin" id="fTg-Pl-aM7"/>
+                            <constraint firstItem="Qni-qI-SWu" firstAttribute="top" secondItem="7f1-5Q-YpV" secondAttribute="bottom" constant="8" id="wpA-N1-gUY"/>
+                            <constraint firstAttribute="centerX" secondItem="7xP-0p-gLz" secondAttribute="centerX" id="zDb-e6-BS0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="User" id="n2f-9d-FNO"/>
+                    <connections>
+                        <outlet property="changePhotoBtn" destination="dOD-Ow-oKo" id="cOi-jh-oNs"/>
+                        <outlet property="emailLabel" destination="gnj-3Z-SxE" id="eU4-dj-5E8"/>
+                        <outlet property="fullNameLabel" destination="HmT-8p-aWT" id="mUr-wi-zgr"/>
+                        <outlet property="userProPicIV" destination="7xP-0p-gLz" id="4zf-aE-IWd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hr9-dd-Tz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2815" y="173"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="avatar-placeholder-2" width="176" height="176"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="T6p-DW-31t"/>
     </inferredMetricsTieBreakers>
