@@ -22,6 +22,7 @@
     [super viewDidLoad];
     self.profilePicIV.layer.cornerRadius = self.profilePicIV.frame.size.width/2;
     self.profilePicIV.clipsToBounds = YES;
+    self.profilePicIV.image = [UIImage imageNamed:@"avatar-placeholder-2"];
     self.fullNameLabel.text = [NSString stringWithFormat:@"%@ %@", ((PFUser*)self.message[@"from"])[@"firstName"], ((PFUser*)self.message[@"from"])[@"lastName"]];
     if((PFFile *) ((PFUser*)self.message[@"from"])[@"profilePic"]){
         self.profilePicIV.file = (PFFile *) ((PFUser*)self.message[@"from"])[@"profilePic"];

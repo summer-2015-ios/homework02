@@ -70,11 +70,16 @@
     PFImageView* imageView = (PFImageView*)[cell viewWithTag:2000];
     imageView.layer.cornerRadius = imageView.frame.size.width/2;
     imageView.clipsToBounds = YES;
-    imageView.file = sender[@"profilePic"];
-    [imageView loadInBackground ];
+    imageView.image = [UIImage imageNamed:@"avatar-placeholder-2"];
+    if(sender[@"profilePic"]){
+        imageView.file = sender[@"profilePic"];
+        [imageView loadInBackground ];
+    }
     
     if ([(NSNumber*)message[@"isRead"] boolValue]) {
         [((UILabel*)[cell viewWithTag:2003]) setHidden:YES];
+    }else{
+        [((UILabel*)[cell viewWithTag:2003]) setHidden:NO];
     }
     return cell;
 }
@@ -88,6 +93,29 @@
     long row = [self.tableView indexPathForCell:cell].row;
     vc.message = (PFObject*)self.messages[row];
     NSLog(@"Sending model %@", vc.message);
+}
+- (IBAction)deleteClicked:(UIButton *)sender {
+    UITableViewCell* clickedCell = (UITableViewCell*)sender.superview.superview;
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:clickedCell];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Delete Message"
+                                                                   message:@"Do you really want to delete this message?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              [self.messages[indexPath.row] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                                                  if(error){
+                                                                      NSLog(@"error deleting message %@", error);
+                                                                      return;
+                                                                  }
+                                                                  [self loadMessages];
+                                                              }];
+                                                          }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
