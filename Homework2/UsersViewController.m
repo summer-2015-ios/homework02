@@ -22,9 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self loadUsers];
+   
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+     [self loadUsers];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -61,11 +63,10 @@
     UILabel* title = (UILabel*)[cell viewWithTag:2001];
     PFUser *user = (PFUser*)self.users[indexPath.row];
     title.text =  [NSString stringWithFormat:@"%@ %@", user[@"firstName"], user[@"lastName"]];
-    
-    PFImageView *userProfilePic = (PFImageView*)[cell viewWithTag:2000];
+    PFImageView* userProfilePic = (PFImageView*)[cell viewWithTag:2000];
     userProfilePic.layer.cornerRadius = userProfilePic.frame.size.width / 2;
     userProfilePic.clipsToBounds = YES;
-    
+   // userProfilePic.vi
     userProfilePic.image = [UIImage imageNamed:@"avatar-placeholder-2"];
     if((PFFile *) user[@"profilePic"]){
         userProfilePic.file = (PFFile *) user[@"profilePic"];

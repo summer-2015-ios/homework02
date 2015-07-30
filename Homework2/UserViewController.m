@@ -10,12 +10,12 @@
 #import <PFUser.h>
 #import <ParseUI.h>
 
-@interface UserViewController ()
+@interface UserViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UIButton *changePhotoBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *userProPicIV;
-
+@property (weak, nonatomic) IBOutlet PFImageView *userProPicIV;
+@property UIImagePickerController* libraryUI;
 @end
 
 @implementation UserViewController
@@ -29,14 +29,9 @@
     }
     self.fullNameLabel.text = [NSString stringWithFormat:@"%@ %@", self.user[@"firstName"], self.user[@"lastName"]];
     self.emailLabel.text = self.user.email;
-    PFImageView *userProfilePic = (PFImageView*)self.userProPicIV;
-//    userProfilePic.layer.cornerRadius = userProfilePic.frame.size.width / 2;
-//    userProfilePic.clipsToBounds = YES;
-    
-    //userProfilePic.image = [UIImage imageNamed:@"avatar-placeholder-2"];
     if((PFFile *) self.user[@"profilePic"]){
-        userProfilePic.file = (PFFile *) self.user[@"profilePic"];
-        [userProfilePic loadInBackground];
+        self.userProPicIV.file = (PFFile *) self.user[@"profilePic"];
+        [self.userProPicIV loadInBackground];
     }
 
 }
@@ -56,6 +51,37 @@
 }
 */
 - (IBAction)changePhotoClicked:(id)sender {
+    [self createPhotoAlbumViewer];
+}
+-(void) createPhotoAlbumViewer{
+    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        NSLog(@"photo library view not available");
+        return;
+    }
+    //NSArray* mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypePhotoLibrary];
+   // NSLog(@"media Types %@", mediaTypes);
+    self.libraryUI = [[UIImagePickerController alloc] init];
+    self.libraryUI.mediaTypes = @[@"public.image"];
+    self.libraryUI.allowsEditing = YES;
+    self.libraryUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.libraryUI.delegate = self;
+    [self presentViewController:self.libraryUI
+                       animated:YES
+                     completion:nil];
 }
 
+- (void) imagePickerController: (UIImagePickerController *) picker
+ didFinishPickingMediaWithInfo: (NSDictionary *) info {
+  //  NSLog(@"Got info %@", info);
+    [self.libraryUI dismissViewControllerAnimated:YES completion:nil];
+    UIImage* selectedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    self.user[@"profilePic"] = [PFFile fileWithData:UIImagePNGRepresentation(selectedImage)];
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(error) {
+            NSLog(@"error saving profile pic %@", error);
+            return;
+        }
+        self.userProPicIV.image = selectedImage;
+    }];
+}
 @end
