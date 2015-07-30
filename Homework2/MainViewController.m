@@ -10,6 +10,10 @@
 #import <Parse.h>
 
 @interface MainViewController ()
+@property (weak, nonatomic) IBOutlet UITableViewCell *profileCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *forumsCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *inboxCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *usersCell;
 
 @end
 
@@ -91,8 +95,9 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     if([segue.identifier isEqualToString:@"logoutSegue"]){
+    if([segue.identifier isEqualToString:@"logoutSegue"]){
         [PFUser logOutInBackground] ;
+        return;
     }
 }
 
