@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import <Parse.h>
+#import "UserViewController.h"
 
 @interface MainViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *profileCell;
@@ -98,6 +99,10 @@
     if([segue.identifier isEqualToString:@"logoutSegue"]){
         [PFUser logOutInBackground] ;
         return;
+    }
+    if([segue.identifier isEqualToString:@"mainToProfileSegue"]){
+        UserViewController* vc = segue.destinationViewController;
+        vc.user = [PFUser currentUser];
     }
 }
 

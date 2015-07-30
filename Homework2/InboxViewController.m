@@ -21,13 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+-(void)viewDidAppear:(BOOL)animated{
     [self loadMessages];
 }
 -(void) loadMessages{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery* messagesQuery = [PFQuery queryWithClassName:@"Message"];
     [messagesQuery whereKey:@"to" equalTo:[PFUser currentUser]];
-    [messagesQuery orderByAscending:@"createdAt"];
+    [messagesQuery orderByDescending:@"createdAt"];
     [messagesQuery includeKey:@"from"];
     [messagesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(error) {
