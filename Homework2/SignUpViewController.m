@@ -79,7 +79,7 @@
             [self presentViewController:alert animated:YES completion:nil];
             return;
         }
-        [self performSegueWithIdentifier:@"signUpToEventsSegue" sender:self];
+        [self performSegueWithIdentifier:@"signUpToMainVCSegue" sender:self];
     }];
 }
 

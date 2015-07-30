@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <Parse.h>
+#import <MBProgressHUD.h>
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *loginTV;
@@ -25,7 +26,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     if([PFUser currentUser]){
         // go to Events
-        [self performSegueWithIdentifier:@"loginToEventsSegue" sender:self];
+        [self performSegueWithIdentifier:@"loginToMainVCSegue" sender:self];
         return;
     }else{
         NSLog(@"no logged in user");
@@ -37,8 +38,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)loginClicked:(UIButton *)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [PFUser logInWithUsernameInBackground:self.loginTV.text
                                  password:self.passwordTV.text block:^(PFUser *user, NSError *error) {
+                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                                      if(error){
                                          NSLog(@"Error loging in: %@", error);
                                          UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Login Error"
@@ -67,8 +70,8 @@
                                          return;
                                      }
                                      NSLog(@"User : %@", user);
-                                     // go to events
-                                     [self performSegueWithIdentifier:@"loginToEventsSegue" sender:self];
+                                     // go to mainVC
+                                     [self performSegueWithIdentifier:@"loginToMainVCSegue" sender:self];
                                      return;
                                      
                                  }];
