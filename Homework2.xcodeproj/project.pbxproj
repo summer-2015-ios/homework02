@@ -22,6 +22,7 @@
 		3FF418651B6A95B200CFDA82 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418641B6A95B200CFDA82 /* MessageViewController.m */; };
 		3FF418681B6AAC4D00CFDA82 /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418671B6AAC4D00CFDA82 /* InboxViewController.m */; };
 		3FF4186B1B6ABD0500CFDA82 /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4186A1B6ABD0500CFDA82 /* MessageDetailViewController.m */; };
+		3FF4186E1B6AD2C300CFDA82 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4186D1B6AD2C300CFDA82 /* UserListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		3FF418671B6AAC4D00CFDA82 /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
 		3FF418691B6ABD0500CFDA82 /* MessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
 		3FF4186A1B6ABD0500CFDA82 /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
+		3FF4186C1B6AD2C300CFDA82 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListViewController.h; sourceTree = "<group>"; };
+		3FF4186D1B6AD2C300CFDA82 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListViewController.m; sourceTree = "<group>"; };
 		88DBDCFE0299CC257B6AA261 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D19F1628A352A9195E206F4F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -127,6 +130,8 @@
 				3FF418671B6AAC4D00CFDA82 /* InboxViewController.m */,
 				3FF418691B6ABD0500CFDA82 /* MessageDetailViewController.h */,
 				3FF4186A1B6ABD0500CFDA82 /* MessageDetailViewController.m */,
+				3FF4186C1B6AD2C300CFDA82 /* UserListViewController.h */,
+				3FF4186D1B6AD2C300CFDA82 /* UserListViewController.m */,
 				3FF4183B1B6A68DB00CFDA82 /* Images.xcassets */,
 				3FF4183D1B6A68DB00CFDA82 /* LaunchScreen.xib */,
 				3FF418381B6A68DB00CFDA82 /* Main.storyboard */,
@@ -317,6 +322,7 @@
 				3FF418371B6A68DB00CFDA82 /* ViewController.m in Sources */,
 				3FF418341B6A68DB00CFDA82 /* AppDelegate.m in Sources */,
 				3FF4186B1B6ABD0500CFDA82 /* MessageDetailViewController.m in Sources */,
+				3FF4186E1B6AD2C300CFDA82 /* UserListViewController.m in Sources */,
 				3FF418561B6A6C2400CFDA82 /* SignUpViewController.m in Sources */,
 				3FF4185F1B6A74FD00CFDA82 /* UsersViewController.m in Sources */,
 				3FF418681B6AAC4D00CFDA82 /* InboxViewController.m in Sources */,

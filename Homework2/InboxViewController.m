@@ -88,11 +88,15 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    MessageDetailViewController* vc = [segue destinationViewController];
-    UITableViewCell* cell = (UITableViewCell*) sender;
-    long row = [self.tableView indexPathForCell:cell].row;
-    vc.message = (PFObject*)self.messages[row];
-    NSLog(@"Sending model %@", vc.message);
+    if([segue.identifier isEqualToString:@"inboxToMessageDetailSegue"]){
+        MessageDetailViewController* vc = [segue destinationViewController];
+        UITableViewCell* cell = (UITableViewCell*) sender;
+        long row = [self.tableView indexPathForCell:cell].row;
+        vc.message = (PFObject*)self.messages[row];
+        NSLog(@"Sending model %@", vc.message);
+    }else if([segue.identifier isEqualToString:@"inboxToMessageSegue"]){
+        
+    }
 }
 - (IBAction)deleteClicked:(UIButton *)sender {
     UITableViewCell* clickedCell = (UITableViewCell*)sender.superview.superview;
@@ -117,6 +121,8 @@
     [alert addAction:cancelAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
+-(IBAction)backToInboxFromMessageByCancel:(UIStoryboardSegue*)segue{
+    NSLog(@"back from message by cancel");
+}
 
 @end

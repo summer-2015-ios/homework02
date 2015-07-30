@@ -24,10 +24,17 @@
     [super viewDidLoad];
     self.profilePicIV.layer.cornerRadius = self.profilePicIV.frame.size.width/2;
     self.profilePicIV.clipsToBounds = YES;
-    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.toUser[@"firstName"], self.toUser[@"lastName"]];
-    if((PFFile *) self.toUser[@"profilePic"]){
-        self.profilePicIV.file = (PFFile *) self.toUser[@"profilePic"];
-        [self.profilePicIV loadInBackground];
+    if(self.toUser){
+        self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.toUser[@"firstName"], self.toUser[@"lastName"]];
+        self.profilePicIV.image = [UIImage imageNamed:@"avatar-placeholder-2"];
+        if((PFFile *) self.toUser[@"profilePic"]){
+            self.profilePicIV.file = (PFFile *) self.toUser[@"profilePic"];
+            [self.profilePicIV loadInBackground];
+        }
+    }else{
+        [self.nameButton setHidden:NO];
+        [self.nameLabel setHidden:YES];
+        
     }
 }
 
@@ -36,15 +43,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"sendMessageToSelectUserSegue"]){
+        NSLog(@"");
+    }
 }
-*/
+
 - (IBAction)submitClicked:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFObject* message = [PFObject objectWithClassName:@"Message"];
@@ -61,7 +69,33 @@
         [self goBackToInitiator];
     }];
 }
+- (IBAction)cancelClicked:(id)sender {
+    if(!self.toUser){
+        // implies came from inbox
+        [self performSegueWithIdentifier:@"messageToInboxSegueByCancel" sender:self];
+        return;
+    }else {
+        [self performSegueWithIdentifier:@"messageToUserSegueByCancel" sender:self];
+    }
+}
 -(void) goBackToInitiator{
     [self performSegueWithIdentifier:@"messageToUserSegueBySubmit" sender:self];
 }
+- (IBAction)selectUserClicked:(UIButton *)sender {
+    
+}
+
+#pragma mark - Unwind
+-(IBAction)backFromULVC:(UIStoryboardSegue*)segue{
+    NSLog(@"selected User : %@", self.selectedUser);
+    [self.nameButton setHidden:YES];
+    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.selectedUser[@"firstName"], self.selectedUser[@"lastName"]];
+    self.profilePicIV.image = [UIImage imageNamed:@"avatar-placeholder-2"];
+    if((PFFile *) self.selectedUser[@"profilePic"]){
+        self.profilePicIV.file = (PFFile *) self.selectedUser[@"profilePic"];
+        [self.profilePicIV loadInBackground];
+    }
+    [self.nameLabel setHidden:NO];
+}
+
 @end
