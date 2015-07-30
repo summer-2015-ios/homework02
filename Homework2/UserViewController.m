@@ -9,6 +9,8 @@
 #import "UserViewController.h"
 #import <PFUser.h>
 #import <ParseUI.h>
+#import <MBProgressHUD.h>
+#import "MessageViewController.h"
 
 @interface UserViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
@@ -41,15 +43,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"userToMessageSegue"]) {
+        MessageViewController* vc = segue.destinationViewController;
+        vc.toUser = self.user;
+        NSLog(@"Sending model %@", vc.toUser);
+    }
 }
-*/
+
 - (IBAction)changePhotoClicked:(id)sender {
     [self createPhotoAlbumViewer];
 }
@@ -63,6 +68,7 @@
     self.libraryUI = [[UIImagePickerController alloc] init];
     self.libraryUI.mediaTypes = @[@"public.image"];
     self.libraryUI.allowsEditing = YES;
+   // self.libraryUI.
     self.libraryUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     self.libraryUI.delegate = self;
     [self presentViewController:self.libraryUI
@@ -76,12 +82,20 @@
     [self.libraryUI dismissViewControllerAnimated:YES completion:nil];
     UIImage* selectedImage = [info objectForKey:UIImagePickerControllerEditedImage];
     self.user[@"profilePic"] = [PFFile fileWithData:UIImagePNGRepresentation(selectedImage)];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if(error) {
             NSLog(@"error saving profile pic %@", error);
             return;
         }
         self.userProPicIV.image = selectedImage;
     }];
+}
+- (IBAction)sendMessageClicked:(id)sender {
+}
+
+-(IBAction)backFromSendMsg:(UIStoryboardSegue*)segue{
+    NSLog(@"Back from send msg");
 }
 @end

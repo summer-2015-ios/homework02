@@ -19,6 +19,7 @@
 		3FF4185C1B6A70D300CFDA82 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4185B1B6A70D300CFDA82 /* MainViewController.m */; };
 		3FF4185F1B6A74FD00CFDA82 /* UsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4185E1B6A74FD00CFDA82 /* UsersViewController.m */; };
 		3FF418621B6A81E700CFDA82 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418611B6A81E700CFDA82 /* UserViewController.m */; };
+		3FF418651B6A95B200CFDA82 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418641B6A95B200CFDA82 /* MessageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		3FF4185E1B6A74FD00CFDA82 /* UsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersViewController.m; sourceTree = "<group>"; };
 		3FF418601B6A81E700CFDA82 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		3FF418611B6A81E700CFDA82 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		3FF418631B6A95B200CFDA82 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		3FF418641B6A95B200CFDA82 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		88DBDCFE0299CC257B6AA261 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D19F1628A352A9195E206F4F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -112,6 +115,8 @@
 				3FF4185E1B6A74FD00CFDA82 /* UsersViewController.m */,
 				3FF418601B6A81E700CFDA82 /* UserViewController.h */,
 				3FF418611B6A81E700CFDA82 /* UserViewController.m */,
+				3FF418631B6A95B200CFDA82 /* MessageViewController.h */,
+				3FF418641B6A95B200CFDA82 /* MessageViewController.m */,
 				3FF4183B1B6A68DB00CFDA82 /* Images.xcassets */,
 				3FF4183D1B6A68DB00CFDA82 /* LaunchScreen.xib */,
 				3FF418381B6A68DB00CFDA82 /* Main.storyboard */,
@@ -304,6 +309,7 @@
 				3FF418561B6A6C2400CFDA82 /* SignUpViewController.m in Sources */,
 				3FF4185F1B6A74FD00CFDA82 /* UsersViewController.m in Sources */,
 				3FF4185C1B6A70D300CFDA82 /* MainViewController.m in Sources */,
+				3FF418651B6A95B200CFDA82 /* MessageViewController.m in Sources */,
 				3FF418311B6A68DB00CFDA82 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
