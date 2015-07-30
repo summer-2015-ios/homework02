@@ -51,6 +51,7 @@
     if ([segue.identifier isEqualToString:@"userToMessageSegue"]) {
         MessageViewController* vc = segue.destinationViewController;
         vc.toUser = self.user;
+        vc.sourceVC = [self class];
         NSLog(@"Sending model %@", vc.toUser);
     }
 }

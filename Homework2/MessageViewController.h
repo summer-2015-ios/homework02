@@ -11,5 +11,5 @@
 
 @interface MessageViewController : UIViewController
 @property PFUser* toUser;
-@property PFUser* selectedUser;
+@property Class sourceVC;
 @end

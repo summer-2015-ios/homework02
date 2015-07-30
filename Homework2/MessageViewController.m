@@ -9,6 +9,9 @@
 #import "MessageViewController.h"
 #import <ParseUI.h>
 #import <MBProgressHUD.h>
+#import "InboxViewController.h"
+#import "UserViewController.h"
+#import "MessageDetailViewController.h"
 
 @interface MessageViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -70,16 +73,23 @@
     }];
 }
 - (IBAction)cancelClicked:(id)sender {
-    if(!self.toUser){
-        // implies came from inbox
+    if(self.sourceVC == [InboxViewController class]){
         [self performSegueWithIdentifier:@"messageToInboxSegueByCancel" sender:self];
         return;
-    }else {
+    }else if (self.sourceVC == [UserViewController class]){
         [self performSegueWithIdentifier:@"messageToUserSegueByCancel" sender:self];
+    }else if(self.sourceVC == [MessageDetailViewController class]){
+        [self performSegueWithIdentifier:@"messageToMessageDetailSegueByCancel" sender:self];
     }
 }
 -(void) goBackToInitiator{
-    [self performSegueWithIdentifier:@"messageToUserSegueBySubmit" sender:self];
+    if(self.sourceVC == [UserViewController class]){
+        [self performSegueWithIdentifier:@"messageToUserSegueBySubmit" sender:self];
+    }else if(self.sourceVC == [InboxViewController class]){
+        [self performSegueWithIdentifier:@"messageToInboxSegueBySubmit" sender:self];
+    } else if(self.sourceVC == [MessageDetailViewController class]){
+        [self performSegueWithIdentifier:@"messageToMessageDetailSegueBySubmit" sender:self];
+    }
 }
 - (IBAction)selectUserClicked:(UIButton *)sender {
     
@@ -87,12 +97,12 @@
 
 #pragma mark - Unwind
 -(IBAction)backFromULVC:(UIStoryboardSegue*)segue{
-    NSLog(@"selected User : %@", self.selectedUser);
+    NSLog(@"selected User : %@", self.toUser);
     [self.nameButton setHidden:YES];
-    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.selectedUser[@"firstName"], self.selectedUser[@"lastName"]];
+    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.toUser[@"firstName"], self.toUser[@"lastName"]];
     self.profilePicIV.image = [UIImage imageNamed:@"avatar-placeholder-2"];
-    if((PFFile *) self.selectedUser[@"profilePic"]){
-        self.profilePicIV.file = (PFFile *) self.selectedUser[@"profilePic"];
+    if((PFFile *) self.toUser[@"profilePic"]){
+        self.profilePicIV.file = (PFFile *) self.toUser[@"profilePic"];
         [self.profilePicIV loadInBackground];
     }
     [self.nameLabel setHidden:NO];

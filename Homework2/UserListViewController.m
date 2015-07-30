@@ -84,7 +84,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"uLVCToMessageVCWithUserSelectionSegue"]){
         MessageViewController* vc = (MessageViewController*)self.presentingViewController;
-        vc.selectedUser = self.selectedUser;
+        vc.toUser = self.selectedUser;
     }
 }
 

@@ -11,6 +11,7 @@
 #import <MBProgressHUD.h>
 #import <ParseUI.h>
 #import "MessageDetailViewController.h"
+#import "MessageViewController.h"
 
 @interface InboxViewController () <UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -95,7 +96,8 @@
         vc.message = (PFObject*)self.messages[row];
         NSLog(@"Sending model %@", vc.message);
     }else if([segue.identifier isEqualToString:@"inboxToMessageSegue"]){
-        
+        MessageViewController* vc = segue.destinationViewController;
+        vc.sourceVC = [self class];
     }
 }
 - (IBAction)deleteClicked:(UIButton *)sender {
@@ -123,6 +125,9 @@
 }
 -(IBAction)backToInboxFromMessageByCancel:(UIStoryboardSegue*)segue{
     NSLog(@"back from message by cancel");
+}
+-(IBAction)backToInboxFromMessageBySubmit:(UIStoryboardSegue*)segue{
+    NSLog(@"back from message by submit");
 }
 
 @end

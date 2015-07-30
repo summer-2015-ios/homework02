@@ -463,7 +463,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Message" id="Ilv-a4-kk2">
-                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="k4L-vS-RKS"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="k4L-vS-RKS">
+                            <connections>
+                                <segue destination="8lA-DJ-K3B" kind="presentation" identifier="messageDetailToMessageVCSegue" id="7aE-GE-z3U"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="fullNameLabel" destination="fND-oM-yka" id="SfQ-uf-EFH"/>
@@ -739,6 +743,9 @@
                         <segue destination="m5j-1H-Swu" kind="unwind" identifier="messageToUserSegueBySubmit" unwindAction="backFromSendMsg:" id="PaO-QO-r4j"/>
                         <segue destination="m5j-1H-Swu" kind="unwind" identifier="messageToUserSegueByCancel" unwindAction="backFromSendMsg:" id="IMP-e7-YDY"/>
                         <segue destination="m5j-1H-Swu" kind="unwind" identifier="messageToInboxSegueByCancel" unwindAction="backToInboxFromMessageByCancel:" id="G9h-P3-h71"/>
+                        <segue destination="m5j-1H-Swu" kind="unwind" identifier="messageToInboxSegueBySubmit" unwindAction="backToInboxFromMessageBySubmit:" id="f1Q-Ia-kME"/>
+                        <segue destination="m5j-1H-Swu" kind="unwind" identifier="messageToMessageDetailSegueByCancel" unwindAction="backToMessageDetailFromMessageByCancel:" id="3oT-dX-EXq"/>
+                        <segue destination="m5j-1H-Swu" kind="unwind" identifier="messageToMessageDetailSegueBySubmit" unwindAction="backToMessageDetailFromMessageBySubmit:" id="dCm-Il-UCB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9q5-Rm-Hp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -823,7 +830,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="T6p-DW-31t"/>
-        <segue reference="taT-Lc-LJx"/>
+        <segue reference="7aE-GE-z3U"/>
         <segue reference="qqk-mJ-KeP"/>
     </inferredMetricsTieBreakers>
 </document>

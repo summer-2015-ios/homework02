@@ -8,6 +8,7 @@
 
 #import "MessageDetailViewController.h"
 #import <ParseUI.h>
+#import "MessageViewController.h"
 
 @interface MessageDetailViewController ()
 @property (weak, nonatomic) IBOutlet PFImageView *profilePicIV;
@@ -49,9 +50,17 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"messageDetailToMessageVCSegue"]){
+        MessageViewController* vc = segue.destinationViewController;
+        vc.toUser = (PFUser*)self.message[@"from"];
+        vc.sourceVC = [self class];
+    }
 }
-
+-(IBAction)backToMessageDetailFromMessageByCancel:(UIStoryboardSegue*)segue{
+    NSLog(@"back from message by cancel");
+}
+-(IBAction)backToMessageDetailFromMessageBySubmit:(UIStoryboardSegue*)segue{
+    NSLog(@"back from message by submit");
+}
 
 @end
