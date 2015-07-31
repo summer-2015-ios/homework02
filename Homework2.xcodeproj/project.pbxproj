@@ -25,6 +25,7 @@
 		3FF4186E1B6AD2C300CFDA82 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF4186D1B6AD2C300CFDA82 /* UserListViewController.m */; };
 		3FF418711B6AF30600CFDA82 /* ForumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418701B6AF30600CFDA82 /* ForumsViewController.m */; };
 		3FF418741B6AFBD500CFDA82 /* ForumMesageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418731B6AFBD500CFDA82 /* ForumMesageViewController.m */; };
+		3FF418771B6BB48400CFDA82 /* ForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418761B6BB48400CFDA82 /* ForumViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		3FF418701B6AF30600CFDA82 /* ForumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumsViewController.m; sourceTree = "<group>"; };
 		3FF418721B6AFBD500CFDA82 /* ForumMesageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumMesageViewController.h; sourceTree = "<group>"; };
 		3FF418731B6AFBD500CFDA82 /* ForumMesageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumMesageViewController.m; sourceTree = "<group>"; };
+		3FF418751B6BB48400CFDA82 /* ForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumViewController.h; sourceTree = "<group>"; };
+		3FF418761B6BB48400CFDA82 /* ForumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumViewController.m; sourceTree = "<group>"; };
 		88DBDCFE0299CC257B6AA261 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D19F1628A352A9195E206F4F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -142,6 +145,8 @@
 				3FF418701B6AF30600CFDA82 /* ForumsViewController.m */,
 				3FF418721B6AFBD500CFDA82 /* ForumMesageViewController.h */,
 				3FF418731B6AFBD500CFDA82 /* ForumMesageViewController.m */,
+				3FF418751B6BB48400CFDA82 /* ForumViewController.h */,
+				3FF418761B6BB48400CFDA82 /* ForumViewController.m */,
 				3FF4183B1B6A68DB00CFDA82 /* Images.xcassets */,
 				3FF4183D1B6A68DB00CFDA82 /* LaunchScreen.xib */,
 				3FF418381B6A68DB00CFDA82 /* Main.storyboard */,
@@ -336,6 +341,7 @@
 				3FF4186B1B6ABD0500CFDA82 /* MessageDetailViewController.m in Sources */,
 				3FF4186E1B6AD2C300CFDA82 /* UserListViewController.m in Sources */,
 				3FF418561B6A6C2400CFDA82 /* SignUpViewController.m in Sources */,
+				3FF418771B6BB48400CFDA82 /* ForumViewController.m in Sources */,
 				3FF4185F1B6A74FD00CFDA82 /* UsersViewController.m in Sources */,
 				3FF418681B6AAC4D00CFDA82 /* InboxViewController.m in Sources */,
 				3FF4185C1B6A70D300CFDA82 /* MainViewController.m in Sources */,

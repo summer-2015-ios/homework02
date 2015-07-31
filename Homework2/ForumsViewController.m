@@ -10,6 +10,7 @@
 #import <Parse.h>
 #import <MBProgressHUD.h>
 #import <ParseUI.h>
+#import "ForumViewController.h"
 
 @interface ForumsViewController () <UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -23,14 +24,14 @@
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
-    [self fetchForums];
+    [self loadForums];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
--(void) fetchForums{
+-(void) loadForums{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery* forumsQuery = [PFQuery queryWithClassName:@"Forum"];
     [forumsQuery orderByAscending:@"createdAt"];
@@ -52,6 +53,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"forumsToForumMsgSegue"]){
         
+    }else if([segue.identifier isEqualToString:@"forumsToForumSegue"]){
+        ForumViewController* vc = [segue destinationViewController];
+        UITableViewCell* cell = (UITableViewCell*) sender;
+        long row = [self.tableView indexPathForCell:cell].row;
+        vc.forum = (PFObject*)self.forums[row];
+        NSLog(@"Sending model %@", vc.forum);
     }
 }
 
@@ -99,5 +106,29 @@
 }
 -(IBAction)backFromForumMessageVCBySubmit:(UIStoryboardSegue*)segue{
     NSLog(@"back from forum message vc by submit");
+}
+- (IBAction)deleteClicked:(UIButton*)sender {
+    UITableViewCell* clickedCell =  (UITableViewCell*)sender.superview.superview;
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:clickedCell];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Delete Message"
+                                                                   message:@"Do you really want to delete this forum?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {
+                                                         [self.forums[indexPath.row] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                                             if(error){
+                                                                 NSLog(@"error deleting forum %@", error);
+                                                                 return;
+                                                             }
+                                                             [self loadForums];
+                                                         }];
+                                                     }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {}];
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 @end
