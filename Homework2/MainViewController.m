@@ -97,7 +97,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"logoutSegue"]){
-        [PFUser logOutInBackground] ;
         return;
     }
     if([segue.identifier isEqualToString:@"mainToProfileSegue"]){
@@ -107,7 +106,13 @@
 }
 
 - (IBAction)logoutClicked:(id)sender {
-    [self performSegueWithIdentifier:@"logoutSegue" sender:self];
+    [PFUser logOutInBackgroundWithBlock:^(NSError *error) {
+        if(error){
+            NSLog(@"Error logging out : %@", error);
+            return ;
+        }
+        [self performSegueWithIdentifier:@"logoutSegue" sender:self];
+    }] ;
 }
 
 @end

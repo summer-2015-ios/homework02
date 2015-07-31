@@ -289,7 +289,7 @@
                         <outlet property="inboxCell" destination="0fq-Xx-xQY" id="itg-RF-tx1"/>
                         <outlet property="profileCell" destination="P9o-uW-TVr" id="sZ9-UV-0CD"/>
                         <outlet property="usersCell" destination="Tgi-Il-AdX" id="3Qr-ny-JdA"/>
-                        <segue destination="yUQ-Yx-Hpi" kind="show" identifier="logoutSegue" id="xyT-LL-hbe"/>
+                        <segue destination="yUQ-Yx-Hpi" kind="showDetail" identifier="logoutSegue" id="xyT-LL-hbe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDE-Dc-gDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
