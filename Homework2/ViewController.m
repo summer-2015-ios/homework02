@@ -15,26 +15,37 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *loginTV;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTV;
-
+@property NSString* emailFromUrl;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(segueToSignUp:)
+                                                 name:@"emailFromUrlReceived"
+                                               object:nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     if([PFUser currentUser]){
-        // go to Events
+        // go to Main
         [self performSegueWithIdentifier:@"loginToMainVCSegue" sender:self];
         return;
     }else{
         NSLog(@"no logged in user");
+//        AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+//        if(delegate.emailFromUrl.length){
+//            [self performSegueWithIdentifier:@"signUpSegue" sender:self];
+//        }
     }
 }
-
+-(void) segueToSignUp:(NSNotification*) notification{
+    self.emailFromUrl = notification.userInfo[@"email"];
+    [self performSegueWithIdentifier:@"signUpSegue" sender:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -85,10 +96,10 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"signUpSegue"]){
-        AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
-        if(delegate.emailFromUrl.length){
+        //AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+        if(self.emailFromUrl.length){
             SignUpViewController* vc = segue.destinationViewController;
-            vc.emailFromInvite = delegate.emailFromUrl;
+            vc.emailFromInvite = self.emailFromUrl;
         }
     }
 }

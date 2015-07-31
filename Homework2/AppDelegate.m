@@ -49,9 +49,14 @@
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     NSString* queryString = [url query];
     queryString = [queryString stringByRemovingPercentEncoding];
-    self.emailFromUrl = [queryString componentsSeparatedByString:@"="][1];
-    if([self.window.rootViewController isKindOfClass:[ViewController class]]){
-        [self.window.rootViewController performSegueWithIdentifier:@"signUpSegue" sender:self.window.rootViewController];
+    @try{
+        self.emailFromUrl = [queryString componentsSeparatedByString:@"="][1];
+        NSDictionary* dict = @{@"email" : self.emailFromUrl};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"emailFromUrlReceived" object:nil userInfo:dict];
+    }@catch (NSException *exception) {
+        return NO;
+    }@finally {
+        
     }
     return YES;
 }
