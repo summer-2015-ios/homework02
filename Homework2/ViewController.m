@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import <Parse.h>
 #import <MBProgressHUD.h>
+#import "AppDelegate.h"
+#import "SignUpViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *loginTV;
@@ -81,5 +83,13 @@
     NSLog(@"Cancel back from Signup");
 }
 
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"signUpSegue"]){
+        AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+        if(delegate.emailFromUrl.length){
+            SignUpViewController* vc = segue.destinationViewController;
+            vc.emailFromInvite = delegate.emailFromUrl;
+        }
+    }
+}
 @end

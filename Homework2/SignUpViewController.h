@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SignUpViewController : UIViewController
-
+@property NSString* emailFromInvite;
 @end

@@ -22,9 +22,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    if(self.emailFromInvite.length !=0){
+        self.emailTV.text = self.emailFromInvite;
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

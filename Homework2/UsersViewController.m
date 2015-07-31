@@ -89,5 +89,11 @@
     }
 }
 
+-(IBAction)backFromInviteByCancel:(UIStoryboardSegue*)segue{
+    NSLog(@"back From Invite By Cancel");
 
+}
+-(IBAction)backFromInviteBySubmit:(UIStoryboardSegue*)segue{
+    NSLog(@"back From Invite By Submit");
+}
 @end

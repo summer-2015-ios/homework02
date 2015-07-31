@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <Parse.h>
+#import "SignUpViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -44,5 +46,13 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    NSString* queryString = [url query];
+    queryString = [queryString stringByRemovingPercentEncoding];
+    self.emailFromUrl = [queryString componentsSeparatedByString:@"="][1];
+    if([self.window.rootViewController isKindOfClass:[ViewController class]]){
+        [self.window.rootViewController performSegueWithIdentifier:@"signUpSegue" sender:self.window.rootViewController];
+    }
+    return YES;
+}
 @end
