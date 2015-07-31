@@ -10,10 +10,12 @@
 #import <ParseUI.h>
 #import <MBProgressHUD.h>
 
-@interface ForumViewController () <UITableViewDataSource>
+@interface ForumViewController () <UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property NSMutableArray* comments;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property UIImage* selectedCommentImage;
+@property UIImagePickerController* libraryUI;
+//@property UIImage* selectedCommentImage;
+@property UIImageView* commentImageIV;
 @end
 
 @implementation ForumViewController
@@ -117,6 +119,12 @@
             }else{
                 [((UIButton*)[cell viewWithTag:2003]) setHidden:YES];
             }
+            
+            if(comment[@"commentImage"]){
+                PFImageView* commentImageView = (PFImageView*)[cell viewWithTag:2004];
+                commentImageView.file = comment[@"commentImage"];
+                [commentImageView loadInBackground];
+            }
             break;
         }
     }
@@ -133,29 +141,50 @@
             cellIdentifier = @"postCommentCell";
             break;
         default:
-            cellIdentifier = @"commentCell";
+        {
+            PFObject* comment = (PFObject*)self.comments[indexPath.row - 2];
+            if(!comment[@"commentImage"]){
+                cellIdentifier = @"commentCell";
+            }else{
+                cellIdentifier = @"commentCellWithImage";
+            }
             break;
+        }
     }
     return cellIdentifier;
 }
 - (IBAction)postClicked:(UIButton *)sender {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     UITableViewCell* commentCell = (UITableViewCell*) sender.superview.superview;
     UITextField* commentTF = (UITextField*)[commentCell viewWithTag:2001];
+    if ([commentTF.text length] == 0) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Empty Comment"
+                                                                       message:@"Empty Comment not allowed"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+   
+   
     PFImageView* commentImage = (PFImageView*)[commentCell viewWithTag:2002];
     PFObject* comment = [PFObject objectWithClassName:@"ForumComment"];
     comment[@"text"] = commentTF.text;
     comment[@"forum"] = self.forum;
     comment[@"commenter"] = [PFUser currentUser];
-    if(self.selectedCommentImage){
-        comment[@"commentImage"] = [PFFile fileWithData:UIImagePNGRepresentation(self.selectedCommentImage)];
+    if(self.commentImageIV.image){
+        comment[@"commentImage"] = [PFFile fileWithData:UIImagePNGRepresentation(self.commentImageIV.image)];
     }
     [comment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(error) {
             NSLog(@"error saiving comment %@", error);
             return;
         }
-        self.selectedCommentImage = nil;
+        self.commentImageIV.image = nil;
         commentImage.image = nil;
         commentTF.text = @"";
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -163,8 +192,63 @@
     }];
 }
 - (IBAction)addPhotoClicked:(UIButton *)sender {
+    if(!self.commentImageIV){
+        self.commentImageIV = (UIImageView*)[sender.superview viewWithTag:2002];
+    }
+    [self createPhotoAlbumViewer];
 }
-- (IBAction)deleteCommentClicked:(id)sender {
+- (IBAction)deleteCommentClicked:(UIButton*)sender {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Delete Comment"
+                                                                   message:@"Do you really want to delete this comment?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {
+                                                         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                                         UITableViewCell* commentCell = (UITableViewCell*) sender.superview.superview;
+                                                         long row = ((NSIndexPath*)[self.tableView indexPathForCell:commentCell]).row;
+                                                         // adjusting for comment indices;
+                                                         row -=2;
+                                                         PFObject* comment = self.comments[row];
+                                                         [comment deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                                             if(error) {
+                                                                 NSLog(@"error deleting comment %@", error);
+                                                                 return;
+                                                             }
+                                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                             [self loadForumComments];
+                                                         }];
+
+                                                     }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {}];
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+#pragma mark - Image Picker
+-(void) createPhotoAlbumViewer{
+    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        NSLog(@"photo library view not available");
+        return;
+    }
+    self.libraryUI = [[UIImagePickerController alloc] init];
+    self.libraryUI.mediaTypes = @[@"public.image"];
+    self.libraryUI.allowsEditing = YES;
+    // self.libraryUI.
+    self.libraryUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.libraryUI.delegate = self;
+    [self presentViewController:self.libraryUI
+                       animated:YES
+                     completion:nil];
+}
+
+- (void) imagePickerController: (UIImagePickerController *) picker
+ didFinishPickingMediaWithInfo: (NSDictionary *) info {
+    //  NSLog(@"Got info %@", info);
+    [self.libraryUI dismissViewControllerAnimated:YES completion:nil];
+    UIImage* selectedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    self.commentImageIV.image = selectedImage;
 }
 
 /*
