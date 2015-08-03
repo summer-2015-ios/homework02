@@ -12,6 +12,7 @@
 #import "InboxViewController.h"
 #import "UserViewController.h"
 #import "MessageDetailViewController.h"
+#import "Common.h"
 
 @interface MessageViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -23,8 +24,10 @@
 
 @implementation MessageViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [Common colorTextView:self.msgTV];
     self.profilePicIV.layer.cornerRadius = self.profilePicIV.frame.size.width/2;
     self.profilePicIV.clipsToBounds = YES;
     if(self.toUser){
@@ -57,6 +60,18 @@
 }
 
 - (IBAction)submitClicked:(id)sender {
+    if(!self.toUser || self.msgTV.text.length == 0){
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Send Message Error"
+                                                                       message:@"A recipient and message is mandatory"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFObject* message = [PFObject objectWithClassName:@"Message"];
     message[@"from"] = [PFUser currentUser];

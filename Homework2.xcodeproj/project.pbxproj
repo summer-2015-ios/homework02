@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		130DE8AEE43AAC3D0BB7B6E3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D19F1628A352A9195E206F4F /* libPods.a */; };
+		3FA075071B6FE662008B9444 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA075061B6FE662008B9444 /* Common.m */; };
 		3FF418311B6A68DB00CFDA82 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418301B6A68DB00CFDA82 /* main.m */; };
 		3FF418341B6A68DB00CFDA82 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418331B6A68DB00CFDA82 /* AppDelegate.m */; };
 		3FF418371B6A68DB00CFDA82 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF418361B6A68DB00CFDA82 /* ViewController.m */; };
@@ -41,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		0C5D3EEC64C5EFD48FCE835E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3FA075051B6FE662008B9444 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		3FA075061B6FE662008B9444 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		3FF4182B1B6A68DB00CFDA82 /* Homework2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homework2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FF4182F1B6A68DB00CFDA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FF418301B6A68DB00CFDA82 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -128,6 +131,8 @@
 				3FF418331B6A68DB00CFDA82 /* AppDelegate.m */,
 				3FF418351B6A68DB00CFDA82 /* ViewController.h */,
 				3FF418361B6A68DB00CFDA82 /* ViewController.m */,
+				3FA075051B6FE662008B9444 /* Common.h */,
+				3FA075061B6FE662008B9444 /* Common.m */,
 				3FF418541B6A6C2400CFDA82 /* SignUpViewController.h */,
 				3FF418551B6A6C2400CFDA82 /* SignUpViewController.m */,
 				3FF4185A1B6A70D300CFDA82 /* MainViewController.h */,
@@ -350,6 +355,7 @@
 				3FF418771B6BB48400CFDA82 /* ForumViewController.m in Sources */,
 				3FF4185F1B6A74FD00CFDA82 /* UsersViewController.m in Sources */,
 				3FF418681B6AAC4D00CFDA82 /* InboxViewController.m in Sources */,
+				3FA075071B6FE662008B9444 /* Common.m in Sources */,
 				3FF4185C1B6A70D300CFDA82 /* MainViewController.m in Sources */,
 				3FF418651B6A95B200CFDA82 /* MessageViewController.m in Sources */,
 				3FF418311B6A68DB00CFDA82 /* main.m in Sources */,

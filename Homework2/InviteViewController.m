@@ -8,6 +8,8 @@
 
 #import "InviteViewController.h"
 #import <Parse.h>
+#import "Common.h"
+#import <MBProgressHUD.h>
 
 @interface InviteViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTV;
@@ -17,9 +19,11 @@
 
 @implementation InviteViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [Common colorTextView:self.textTV];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,6 +53,7 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     params[@"to"] = self.emailTV.text;
    
@@ -60,6 +65,7 @@
     [PFCloud callFunctionInBackground:@"sendEmail"
                        withParameters:params
                                 block:^(id object, NSError *error) {
+                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                     if(error){
                                         NSLog(@"Sending email failed : %@", error);
                                         return;

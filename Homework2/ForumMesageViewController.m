@@ -8,6 +8,7 @@
 
 #import "ForumMesageViewController.h"
 #import <Parse.h>
+#import "Common.h"
 
 @interface ForumMesageViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *msgTxt;
@@ -18,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [Common colorTextView:self.msgTxt];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +36,18 @@
     // Pass the selected object to the new view controller.
 }
 - (IBAction)submitClicked:(id)sender {
+    if(self.msgTxt.text.length == 0){
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Create Forum Error"
+                                                                       message:@"A message is mandatory"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     PFObject* forum = [PFObject objectWithClassName:@"Forum"];
     forum[@"user"] = [PFUser currentUser];
     forum[@"text"] = self.msgTxt.text;
