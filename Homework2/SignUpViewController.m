@@ -8,11 +8,11 @@
 
 #import "SignUpViewController.h"
 #import <Parse/PFUser.h>
+#import "AppDelegate.h"
 
 @interface SignUpViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTV;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTV;
-@property (weak, nonatomic) IBOutlet UITextField *emailTV;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTV;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTV;
 
@@ -27,6 +27,12 @@
     if(self.emailFromInvite.length !=0){
         self.emailTV.text = self.emailFromInvite;
     }
+    //    else {
+    //        AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    //        if(delegate.emailFromUrl){
+    //            self.emailTV.text = delegate.emailFromUrl;
+    //        }
+    //    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -85,7 +91,9 @@
         [self performSegueWithIdentifier:@"signUpToMainVCSegue" sender:self];
     }];
 }
-
+-(void)viewDidDisappear:(BOOL)animated{
+    NSLog(@"SignUpVC disappeared");
+}
 /*
 #pragma mark - Navigation
 

@@ -52,7 +52,7 @@
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     params[@"to"] = self.emailTV.text;
    
-    NSString* body = [NSString stringWithFormat:@"%@ <br/> %@", self.textTV.text, [NSString stringWithFormat:@"<a href=\"forummsgapp:www.uncc.edu/?email=%@\">Click Here!</a>", self.emailTV.text]];
+    NSString* body = [NSString stringWithFormat:@"%@ <br/> %@", self.textTV.text, [NSString stringWithFormat:@"<a href=\"hw2://www.uncc.edu/?email=%@\">Click Here!</a>", self.emailTV.text]];
     NSLog(@"email body : %@", body);
     params[@"text"] = body;
     PFUser* user = [PFUser currentUser];

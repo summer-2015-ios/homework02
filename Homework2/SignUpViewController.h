@@ -10,4 +10,5 @@
 
 @interface SignUpViewController : UIViewController
 @property NSString* emailFromInvite;
+@property (weak, nonatomic) IBOutlet UITextField *emailTV;
 @end

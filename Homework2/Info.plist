@@ -23,7 +23,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>forummsgapp</string>
+				<string>hw2</string>
 			</array>
 		</dict>
 	</array>

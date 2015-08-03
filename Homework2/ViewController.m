@@ -15,21 +15,22 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *loginTV;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTV;
-@property NSString* emailFromUrl;
+//@property NSString* emailFromUrl;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(segueToSignUp:)
-                                                 name:@"emailFromUrlReceived"
-                                               object:nil];
-    // Do any additional setup after loading the view, typically from a nib.
+       // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(segueToSignUp:)
+//                                                 name:@"emailFromUrlReceived"
+//                                               object:nil];
+
     if([PFUser currentUser]){
         // go to Main
         [self performSegueWithIdentifier:@"loginToMainVCSegue" sender:self];
@@ -42,7 +43,14 @@
 //        }
     }
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    NSLog(@"VC disappeared");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"emailFromUrlReceived" object:nil];
+}
+-(void)dealloc{
+}
 -(void) segueToSignUp:(NSNotification*) notification{
+    NSLog(@"Notification received: trying to segue");
     self.emailFromUrl = notification.userInfo[@"email"];
     [self performSegueWithIdentifier:@"signUpSegue" sender:self];
 }
@@ -93,6 +101,10 @@
 -(IBAction)cancelFromSinUp:(UIStoryboardSegue* )segue{
     NSLog(@"Cancel back from Signup");
 }
+- (IBAction)createNewACClicked:(UIButton *)sender {
+    //self.emailFromUrl = nil;
+    [self performSegueWithIdentifier:@"signUpSegue" sender:self];
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"signUpSegue"]){
@@ -101,6 +113,11 @@
             SignUpViewController* vc = segue.destinationViewController;
             vc.emailFromInvite = self.emailFromUrl;
         }
+//        else{
+//             AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+//            delegate.emailFromUrl = nil;
+//        }
     }
 }
+
 @end

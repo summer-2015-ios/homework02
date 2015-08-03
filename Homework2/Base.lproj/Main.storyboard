@@ -92,7 +92,7 @@
                     </view>
                     <connections>
                         <outlet property="confirmPasswordTV" destination="sOT-EF-gaa" id="VEI-p4-iys"/>
-                        <outlet property="emailTV" destination="728-Kt-S6M" id="qfd-Gl-Vog"/>
+                        <outlet property="emailTV" destination="728-Kt-S6M" id="mNf-II-tNo"/>
                         <outlet property="firstNameTV" destination="eDM-Ew-Nx7" id="X8X-Dk-Dby"/>
                         <outlet property="lastNameTV" destination="fC6-Sw-9EK" id="SdE-xR-KDi"/>
                         <outlet property="passwordTV" destination="zcq-0K-ch2" id="LX3-h3-dLn"/>
@@ -116,21 +116,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zLq-d8-XOt">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zLq-d8-XOt">
                                 <rect key="frame" x="16" y="116" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJX-2U-SaZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJX-2U-SaZ">
                                 <rect key="frame" x="229" y="67" width="142" height="30"/>
                                 <state key="normal" title="Create New Account">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="OuP-tZ-blv" kind="presentation" identifier="signUpSegue" id="Mm0-Jt-aI2"/>
+                                    <action selector="createNewACClicked:" destination="yUQ-Yx-Hpi" eventType="touchUpInside" id="crp-Ox-iyu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xa2-Gl-LhP">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xa2-Gl-LhP">
                                 <rect key="frame" x="281" y="223" width="38" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -139,7 +139,7 @@
                                     <action selector="loginClicked:" destination="yUQ-Yx-Hpi" eventType="touchUpInside" id="gB8-Uj-kIf"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lyo-UO-WrE">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lyo-UO-WrE">
                                 <rect key="frame" x="16" y="167" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -166,6 +166,7 @@
                         <outlet property="loginTV" destination="zLq-d8-XOt" id="GXF-gt-FXh"/>
                         <outlet property="passwordTV" destination="lyo-UO-WrE" id="DXz-LD-9vS"/>
                         <segue destination="qap-eG-awE" kind="show" identifier="loginToMainVCSegue" id="vRJ-7d-0aj"/>
+                        <segue destination="OuP-tZ-blv" kind="presentation" identifier="signUpSegue" id="CTy-ob-lgV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9D-Oz-rwI" sceneMemberID="firstResponder"/>
