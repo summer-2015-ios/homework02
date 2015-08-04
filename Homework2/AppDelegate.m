@@ -63,6 +63,17 @@
         }else if([activeVC isKindOfClass:[SignUpViewController class]]){
             SignUpViewController* vc = (SignUpViewController*)activeVC;
             vc.emailTV.text =  self.emailFromUrl;
+        }else{
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Sign Up Alert"
+                                                                           message:@"A user is already logged in on this device. Please logout to register as a separate user"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:defaultAction];
+            [activeVC presentViewController:alert animated:YES completion:nil];
+            //activeVC prese
         }
 //        NSDictionary* dict = @{@"email" : self.emailFromUrl};
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"emailFromUrlReceived" object:nil userInfo:dict];
